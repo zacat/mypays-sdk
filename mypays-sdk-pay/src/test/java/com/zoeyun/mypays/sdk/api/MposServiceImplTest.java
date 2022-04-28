@@ -31,8 +31,8 @@ public class MposServiceImplTest {
                 .sceneType(MypaysConstants.SceneType.WX)
                 .expireTime("30")
                 .limitPay(0)
-                .transAmount(600L)
-                .payAmount(600L)
+                .transAmount(600)
+                .payAmount(600)
                 .openId("1234567")
                 .build();
 
