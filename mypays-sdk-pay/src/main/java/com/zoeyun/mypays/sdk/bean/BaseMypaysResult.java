@@ -34,6 +34,6 @@ public abstract class BaseMypaysResult extends MypaysResult {
             throw new MypaysRuntimeException("parse xml error", e);
         }
     }
-    
+
 
 }
