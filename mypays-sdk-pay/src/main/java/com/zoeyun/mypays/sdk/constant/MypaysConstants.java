@@ -18,4 +18,5 @@ public class MypaysConstants {
         public static final String UNIONUP = "UNIONUP";
         public static final String HAIKE = "HAIKE";
     }
+
 }

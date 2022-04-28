@@ -121,6 +121,8 @@ public class MypaysServiceApacheHttpImpl extends BaseMypaysServiceImpl {
         try {
             HttpClientBuilder httpClientBuilder = this.createHttpClientBuilder();
             HttpPost httpPost = this.createHttpPost(url, requestStr);
+            httpPost.addHeader("Accept", "application/json");
+            httpPost.addHeader("Content-Type", "application/x-www-form-urlencoded");
             try (CloseableHttpClient httpClient = httpClientBuilder.build()) {
                 try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
                     String responseString = EntityUtils.toString(response.getEntity(), StandardCharsets.UTF_8);

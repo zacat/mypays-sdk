@@ -1,6 +1,8 @@
 package com.zoeyun.mypays.sdk.bean;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.zoeyun.mypays.sdk.common.annotation.Required;
 import com.zoeyun.mypays.sdk.common.bean.MypaysRequest;
 import com.zoeyun.mypays.sdk.common.exception.MypaysErrorException;
 import com.zoeyun.mypays.sdk.common.utils.BeanUtils;
@@ -17,8 +19,15 @@ import java.util.Map;
 @Data
 public abstract class BaseMypaysRequest extends MypaysRequest {
 
+    /**
+     * 客户端
+     */
     String clientId;
+    /**
+     * 签名
+     */
     String sign;
+
 
 
     /**
@@ -54,7 +63,7 @@ public abstract class BaseMypaysRequest extends MypaysRequest {
      * 注意：不含sign属性
      */
     public Map<String, String> getSignParams() {
-        Map<String, String> map = new HashMap<>(8);
+        Map<String, String> map = new HashMap<>();
         storeMap(map);
         return map;
     }
@@ -81,18 +90,19 @@ public abstract class BaseMypaysRequest extends MypaysRequest {
      * @throws MypaysException the wx pay exception
      */
     public void checkAndSign(MypaysConfigStorage configStorage) throws MypaysException {
-        this.checkFields();
         if (StringUtils.isBlank(clientId)) {
             this.clientId = configStorage.getClientId();
         }
-
-        String content = toString();
+        this.checkFields();
+        String content = toJSONString();
         PrivateKey privateKey = RsaUtils.getPrivateKeyFromPKCS8(RsaUtils.SIGN_TYPE_RSA2, configStorage.getRsaPriKey().getBytes());
         sign = RsaUtils.rsa256Sign(content.getBytes(), privateKey);
     }
 
-    public String toString() {
-        return JSON.toJSONString(getSignParams());
+    public String toJSONString() {
+        Map<String, Object> signMap = new HashMap<>(getSignParams());
+        JSONObject singObject = new JSONObject(signMap);
+        return singObject.toJSONString();
     }
 
 }

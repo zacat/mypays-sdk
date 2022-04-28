@@ -1,10 +1,13 @@
 package com.zoeyun.mypays.sdk.bean;
 
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zoeyun.mypays.sdk.common.bean.MypaysResult;
 import com.zoeyun.mypays.sdk.common.exception.MypaysRuntimeException;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public abstract class BaseMypaysResult extends MypaysResult {
@@ -14,7 +17,6 @@ public abstract class BaseMypaysResult extends MypaysResult {
 
 
     public static <T extends BaseMypaysResult> T fromJSON(String responseContent, Class<T> clz) {
-
         try {
             BaseMypaysResult t = clz.newInstance();
             JSONObject respObj = JSONObject.parseObject(responseContent);
@@ -32,6 +34,6 @@ public abstract class BaseMypaysResult extends MypaysResult {
             throw new MypaysRuntimeException("parse xml error", e);
         }
     }
-
+    
 
 }

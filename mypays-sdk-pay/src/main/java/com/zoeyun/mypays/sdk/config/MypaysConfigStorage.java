@@ -12,9 +12,11 @@ public interface MypaysConfigStorage {
 
     String getRsaPriKey();
 
-    Boolean getIsUseSandboxEnv();
+    Boolean getUseSandboxEnv();
 
     String getPayBaseUrl();
+
+    String getMerchantCode();
 
     /**
      * Gets access token.

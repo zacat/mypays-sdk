@@ -17,21 +17,22 @@ public class MypaysDefaultConfigImpl implements MypaysConfigStorage, Serializabl
     protected volatile String clientSecret;
     protected volatile String rsaPubKey;
     protected volatile String rsaPriKey;
+    protected volatile String merchantCode;
     protected volatile int httpConnectionTimeout = 5000;
     private int httpTimeout = 10000;
-    private boolean isUseSandboxEnv = false;
+    private boolean useSandboxEnv = false;
     protected volatile String accessToken;
     protected volatile long expiresTime;
     protected volatile Lock accessTokenLock = new ReentrantLock();
 
     @Override
-    public Boolean getIsUseSandboxEnv() {
-        return isUseSandboxEnv;
+    public Boolean getUseSandboxEnv() {
+        return useSandboxEnv;
     }
 
     @Override
     public String getPayBaseUrl() {
-        if (isUseSandboxEnv) {
+        if (useSandboxEnv) {
             return DEFAULT_SANDBOX_PAY_BASE_URL;
         }
         return DEFAULT_PAY_BASE_URL;

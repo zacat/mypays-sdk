@@ -1,14 +1,12 @@
-package com.zoeyun.mypays.sdk.bean.mpos;
+package com.zoeyun.mypays.sdk.bean.result;
 
 import com.zoeyun.mypays.sdk.bean.BaseMypaysResult;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
-
 
 @Data
 @Accessors(chain = true)
-public class MposCreateResult extends BaseMypaysResult {
+public class MposGetResult extends BaseMypaysResult {
 
 
     /**
@@ -50,15 +48,19 @@ public class MposCreateResult extends BaseMypaysResult {
     /**
      * 交易状态
      */
-    String txnStatus;
+    Integer txnStatus;
     /**
      * 交易金额
      */
-    Long transAmount;
+    Integer transAmount;
     /**
      * 实际金额
      */
-    Long payAmount;
+    Integer payAmount;
+    /**
+     * 退款金额
+     */
+    Integer refundAmount;
     /**
      * 二维码图片地址
      */
@@ -75,4 +77,8 @@ public class MposCreateResult extends BaseMypaysResult {
      * 预下单订单号
      */
     String prepayId;
+    /**
+     * 附加参数
+     */
+    String attach;
 }

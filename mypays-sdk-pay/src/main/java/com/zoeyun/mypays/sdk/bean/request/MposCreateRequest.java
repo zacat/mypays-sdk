@@ -1,7 +1,9 @@
-package com.zoeyun.mypays.sdk.bean.mpos;
+package com.zoeyun.mypays.sdk.bean.request;
 
 import com.zoeyun.mypays.sdk.bean.BaseMypaysRequest;
+import com.zoeyun.mypays.sdk.bean.mpos.LedgerRelation;
 import com.zoeyun.mypays.sdk.common.annotation.Required;
+import com.zoeyun.mypays.sdk.config.MypaysConfigStorage;
 import com.zoeyun.mypays.sdk.exception.MypaysException;
 import lombok.*;
 import org.apache.commons.lang3.StringUtils;
@@ -25,6 +27,11 @@ import java.util.Map;
 @AllArgsConstructor
 public class MposCreateRequest extends BaseMypaysRequest {
     /**
+     * 商户号
+     */
+    @Required
+    String merchantCode;
+    /**
      * 商户订单号
      */
     @Required
@@ -34,7 +41,8 @@ public class MposCreateRequest extends BaseMypaysRequest {
      * MPOS
      */
     @Required
-    String txnType;
+    @Builder.Default
+    String txnType = "MPOS";
     /**
      * 交易场景
      * ALI：支付宝 WX：微信 UNION：云闪付
@@ -73,17 +81,18 @@ public class MposCreateRequest extends BaseMypaysRequest {
      * 交易金额（单位:分）
      */
     @Required
-    Long transAmount;
+    Integer transAmount;
     /**
      * 实际金额（单位:分）
      */
     @Required
-    Long payAmount;
+    Integer payAmount;
     /**
      * 交易渠道
      */
     @Required
-    String channelCode;
+    @Builder.Default
+    String channelCode = "HAIKE";
     /**
      * 支付结果页面
      */
@@ -92,11 +101,7 @@ public class MposCreateRequest extends BaseMypaysRequest {
      * 商户回调地址
      */
     String clientNotifyUrl;
-    /**
-     * 商户号
-     */
-    @Required
-    String merchantCode;
+
     /**
      * 附加参数
      */
@@ -110,7 +115,6 @@ public class MposCreateRequest extends BaseMypaysRequest {
      */
     String ledgerRelation;
 
-    List<LedgerRelation> ledgerRelationList;
 
 
     /**
@@ -136,7 +140,17 @@ public class MposCreateRequest extends BaseMypaysRequest {
 
     @Override
     protected void checkConstraints() throws MypaysException {
-
+        if (transAmount.compareTo(0) == 0) {
+            throw new MypaysException("交易金额不能为空或为0");
+        }
+        if (payAmount.compareTo(0) == 0) {
+            throw new MypaysException("实际金额不能为空或为0");
+        }
+        if (getTradeType() != null && getTradeType().equalsIgnoreCase("JSAPI")) {
+            if (StringUtils.isEmpty(getOpenId())) {
+                throw new MypaysException("JSAPI支付openId不能为空");
+            }
+        }
     }
 
     /**
@@ -148,6 +162,7 @@ public class MposCreateRequest extends BaseMypaysRequest {
      */
     @Override
     protected void storeMap(Map<String, String> map) {
+        map.put("merchantCode", merchantCode);
         map.put("clientOrderId", clientOrderId);
         map.put("txnType", txnType);
         map.put("sceneType", sceneType);
@@ -161,14 +176,30 @@ public class MposCreateRequest extends BaseMypaysRequest {
         map.put("channelCode", channelCode);
         map.put("frontNotifyUrl", frontNotifyUrl);
         map.put("clientNotifyUrl", clientNotifyUrl);
-        map.put("merchantCode", merchantCode);
         map.put("attach", attach);
         map.put("delay", delay != null ? String.valueOf(delay) : "false");
-        if (StringUtils.isNotEmpty(ledgerRelation)) {
-            map.put("ledgerRelation", ledgerRelation);
-        }
+        map.put("ledgerRelation", ledgerRelation);
         map.put("isMinipg", isMinipg);
         map.put("openId", openId);
         map.put("customerIp", customerIp);
+    }
+
+    /**
+     * <pre>
+     * 检查参数，并设置签名.
+     * 1、检查参数（注意：子类实现需要检查参数的而外功能时，请在调用父类的方法前进行相应判断）
+     * 2、补充系统参数，如果未传入则从配置里读取
+     * 3、生成签名，并设置进去
+     * </pre>
+     *
+     * @param configStorage 支付配置对象，用于读取相应系统配置信息
+     * @throws MypaysException the wx pay exception
+     */
+    @Override
+    public void checkAndSign(MypaysConfigStorage configStorage) throws MypaysException {
+        if (StringUtils.isBlank(merchantCode)) {
+            this.merchantCode = configStorage.getMerchantCode();
+        }
+        super.checkAndSign(configStorage);
     }
 }
