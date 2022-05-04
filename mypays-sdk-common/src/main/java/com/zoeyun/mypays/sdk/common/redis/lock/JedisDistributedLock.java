@@ -10,12 +10,15 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 
+/**
+ * 实现简单的jedis分布锁
+ */
 public class JedisDistributedLock implements Lock {
 
     private final Pool<Jedis> jedisPool;
     private final JedisLock lock;
 
-    public JedisDistributedLock(Pool<Jedis> jedisPool, String key){
+    public JedisDistributedLock(Pool<Jedis> jedisPool, String key) {
         this.jedisPool = jedisPool;
         this.lock = new JedisLock(key);
     }
