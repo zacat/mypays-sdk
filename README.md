@@ -2,7 +2,7 @@
 
 ---------------------------------
 ### Maven 引用方式
-注意：最新版本（包括测试版）为 [![Maven Central]](http://mvnrepository.com/artifact/com.zoeyun/mypays-sdk)，以下为最新正式版。
+注意：最新版本（包括测试版）为  [![Maven Central](https://img.shields.io/maven-central/v/com.zoeyun/mypays-sdk.svg)](http://mvnrepository.com/artifact/com.zoeyun/mypays-sdk)，以下为最新正式版。
 
 ```xml
 <dependency>
