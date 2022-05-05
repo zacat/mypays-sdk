@@ -86,4 +86,12 @@ public interface MposService {
      * @throws MypaysException
      */
     MposReverseQueryResult reverseQuery(MposReverseQueryRequest request) throws MypaysException;
+
+    /**
+     * 账单查询
+     * @param request
+     * @return
+     * @throws MypaysException
+     */
+    MposBillResult bill(MposBillRequest request) throws MypaysException;
 }
