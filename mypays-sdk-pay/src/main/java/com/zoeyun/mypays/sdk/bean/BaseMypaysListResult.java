@@ -43,7 +43,7 @@ public class BaseMypaysListResult<V extends BaseMypays> extends MypaysResult {
             t.responseContent = responseContent;
             return (T) t;
         } catch (Exception e) {
-            throw new MypaysRuntimeException("parse xml error", e);
+            throw new MypaysRuntimeException("parse json error", e);
         }
     }
 
