@@ -1,5 +1,6 @@
 package com.zoeyun.mypays.sdk.service.impl;
 
+import com.zoeyun.mypays.sdk.bean.BaseMypaysListResult;
 import com.zoeyun.mypays.sdk.bean.BaseMypaysResult;
 import com.zoeyun.mypays.sdk.bean.request.*;
 import com.zoeyun.mypays.sdk.bean.result.*;
@@ -92,6 +93,22 @@ public class MposServiceImpl implements MposService {
         request.checkAndSign(payService.getConfigStorage());
         String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
         MposReverseQueryResult result = BaseMypaysResult.fromJSON(responseContent, MposReverseQueryResult.class);
+        return result;
+    }
+
+    /**
+     * 账单查询
+     *
+     * @param request
+     * @return
+     * @throws MypaysException
+     */
+    @Override
+    public MposBillResult bill(MposBillRequest request) throws MypaysException {
+        String url = this.payService.getPayBaseUrl() + "/api/txn/mpos/bill";
+        request.checkAndSign(payService.getConfigStorage());
+        String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
+        MposBillResult result = BaseMypaysListResult.fromJSON(responseContent, MposBillResult.class);
         return result;
     }
 }
