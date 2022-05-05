@@ -7,7 +7,7 @@
     <groupId>com.zoeyun</groupId>
     <artifactId>mypays-sdk</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <modules>
         <module>mypays-sdk-common</module>
         <module>mypays-sdk-pay</module>
