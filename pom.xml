@@ -12,8 +12,8 @@
         <module>mypays-sdk-common</module>
         <module>mypays-sdk-pay</module>
     </modules>
-    <name>Mypays</name>
-    <description>Mypays</description>
+    <name>汇享天成聚合支付</name>
+    <description>汇享天成聚合支付 Java SDK</description>
     <url>https://github.com/zacat/mypays-sdk</url>
 
     <properties>

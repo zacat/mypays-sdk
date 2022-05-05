@@ -11,8 +11,8 @@
     <version>1.0.0</version>
     <packaging>jar</packaging>
     <artifactId>mypays-sdk-pay</artifactId>
-    <name>Mypays - Pay Java SDK</name>
-    <description>Mypays开发Java SDK支付模块</description>
+    <name>汇享天成聚合支付 - Pay Java SDK</name>
+    <description>汇享天成聚合支付 - 开发Java SDK支付模块</description>
 
     <dependencies>
         <dependency>
