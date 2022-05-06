@@ -2,8 +2,10 @@ package com.zoeyun.mypays.sdk.service.impl;
 
 import com.zoeyun.mypays.sdk.bean.BaseMypaysResult;
 import com.zoeyun.mypays.sdk.bean.request.MerchantBalanceRequest;
+import com.zoeyun.mypays.sdk.bean.request.MerchantLedgerRelationsCreateRequest;
 import com.zoeyun.mypays.sdk.bean.request.MerchantWithdrawRequest;
 import com.zoeyun.mypays.sdk.bean.result.MerchantBalanceResult;
+import com.zoeyun.mypays.sdk.bean.result.MerchantLedgerRelationsCreateResult;
 import com.zoeyun.mypays.sdk.bean.result.MerchantWithdrawResult;
 import com.zoeyun.mypays.sdk.bean.result.MposCreateResult;
 import com.zoeyun.mypays.sdk.exception.MypaysException;
@@ -27,10 +29,19 @@ public class MerchantServiceImpl implements MerchantService {
 
     @Override
     public MerchantWithdrawResult withdraw(MerchantWithdrawRequest request) throws MypaysException {
-        String url = this.payService.getPayBaseUrl() + "/api/merchant/balance";
+        String url = this.payService.getPayBaseUrl() + "/api/merchant/withdraw";
         request.checkAndSign(payService.getConfigStorage());
         String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
-        MerchantBalanceResult result = BaseMypaysResult.fromJSON(responseContent, MerchantBalanceResult.class);
+        MerchantWithdrawResult result = BaseMypaysResult.fromJSON(responseContent, MerchantWithdrawResult.class);
+        return result;
+    }
+
+    @Override
+    public MerchantLedgerRelationsCreateResult ledgerRelationsCreate(MerchantLedgerRelationsCreateRequest request) throws MypaysException {
+        String url = this.payService.getPayBaseUrl() + "/api/merchant/ledger-relations/create";
+        request.checkAndSign(payService.getConfigStorage());
+        String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
+        MerchantLedgerRelationsCreateResult result = BaseMypaysResult.fromJSON(responseContent, MerchantLedgerRelationsCreateResult.class);
         return result;
     }
 }
