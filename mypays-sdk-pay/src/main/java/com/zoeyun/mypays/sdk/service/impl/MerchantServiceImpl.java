@@ -1,13 +1,8 @@
 package com.zoeyun.mypays.sdk.service.impl;
 
 import com.zoeyun.mypays.sdk.bean.BaseMypaysResult;
-import com.zoeyun.mypays.sdk.bean.request.MerchantBalanceRequest;
-import com.zoeyun.mypays.sdk.bean.request.MerchantLedgerRelationsCreateRequest;
-import com.zoeyun.mypays.sdk.bean.request.MerchantWithdrawRequest;
-import com.zoeyun.mypays.sdk.bean.result.MerchantBalanceResult;
-import com.zoeyun.mypays.sdk.bean.result.MerchantLedgerRelationsCreateResult;
-import com.zoeyun.mypays.sdk.bean.result.MerchantWithdrawResult;
-import com.zoeyun.mypays.sdk.bean.result.MposCreateResult;
+import com.zoeyun.mypays.sdk.bean.request.*;
+import com.zoeyun.mypays.sdk.bean.result.*;
 import com.zoeyun.mypays.sdk.exception.MypaysException;
 import com.zoeyun.mypays.sdk.service.MerchantService;
 import com.zoeyun.mypays.sdk.service.MypaysService;
@@ -42,6 +37,24 @@ public class MerchantServiceImpl implements MerchantService {
         request.checkAndSign(payService.getConfigStorage());
         String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
         MerchantLedgerRelationsCreateResult result = BaseMypaysResult.fromJSON(responseContent, MerchantLedgerRelationsCreateResult.class);
+        return result;
+    }
+
+    @Override
+    public MerchantLedgerRelationsQueryResult ledgerRelationsQuery(MerchantLedgerRelationsQueryRequest request) throws MypaysException {
+        String url = this.payService.getPayBaseUrl() + "/api/merchant/ledger-relations/get";
+        request.checkAndSign(payService.getConfigStorage());
+        String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
+        MerchantLedgerRelationsQueryResult result = BaseMypaysResult.fromJSON(responseContent, MerchantLedgerRelationsQueryResult.class);
+        return result;
+    }
+
+    @Override
+    public MerchantLedgerRelationsDeleteResult ledgerRelationsDelete(MerchantLedgerRelationsDeleteRequest request) throws MypaysException {
+        String url = this.payService.getPayBaseUrl() + "/api/merchant/ledger-relations/delete";
+        request.checkAndSign(payService.getConfigStorage());
+        String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
+        MerchantLedgerRelationsDeleteResult result = BaseMypaysResult.fromJSON(responseContent, MerchantLedgerRelationsDeleteResult.class);
         return result;
     }
 }

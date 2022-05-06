@@ -9,18 +9,18 @@ import java.util.Map;
 
 /**
  * <pre>
- *  提交聚合支付的分账关系创建请求对象类
+ *  提交聚合支付的分账关系删除请求对象类
  * Created by SinMax on 2022-05-06.
  * </pre>
  *
- * @author <a href="http://docs.mypays.cn/docs/hxtc-faas/mpos-mch-api-ledger-relations-create">SinMax</a>
+ * @author <a href="http://docs.mypays.cn/docs/hxtc-faas/mpos-mch-api-ledger-relations-delete">SinMax</a>
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Builder(builderMethodName = "newBuilder")
 @NoArgsConstructor
 @AllArgsConstructor
-public class MerchantLedgerRelationsCreateRequest extends BaseMypaysRequest {
+public class MerchantLedgerRelationsDeleteRequest extends BaseMypaysRequest {
 
     /**
      * 分账商户号
@@ -40,10 +40,6 @@ public class MerchantLedgerRelationsCreateRequest extends BaseMypaysRequest {
     @Required
     String channelCode;
 
-    /**
-     * 备注
-     */
-    String remark;
 
     @Override
     protected void checkConstraints() throws MypaysException {
@@ -55,6 +51,5 @@ public class MerchantLedgerRelationsCreateRequest extends BaseMypaysRequest {
         map.put("fromMerchantCode", fromMerchantCode);
         map.put("toMerchantCode", toMerchantCode);
         map.put("channelCode", channelCode);
-        map.put("remark", remark);
     }
 }
