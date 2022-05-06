@@ -15,14 +15,14 @@ import java.util.Map;
  * Created by SinMax on 2022-05-06.
  * </pre>
  *
- * @author <a href="http://docs.mypays.cn/docs/hxtc-faas/mpos-mch-api-balance">SinMax</a>
+ * @author <a href="hhttp://docs.mypays.cn/docs/hxtc-faas/payment-binding-api-apply">SinMax</a>
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Builder(builderMethodName = "newBuilder")
 @NoArgsConstructor
 @AllArgsConstructor
-public class CardBindingCreateRequest extends BaseMypaysRequest {
+public class CardbindingCreateRequest extends BaseMypaysRequest {
 
     /**
      * 商户订单号

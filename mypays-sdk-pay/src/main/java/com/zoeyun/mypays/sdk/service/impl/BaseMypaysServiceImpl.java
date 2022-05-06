@@ -4,9 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.zoeyun.mypays.sdk.config.MypaysConfigStorage;
 import com.zoeyun.mypays.sdk.exception.MypaysException;
-import com.zoeyun.mypays.sdk.service.MerchantService;
-import com.zoeyun.mypays.sdk.service.MposService;
-import com.zoeyun.mypays.sdk.service.MypaysService;
+import com.zoeyun.mypays.sdk.service.*;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -17,6 +15,10 @@ public abstract class BaseMypaysServiceImpl implements MypaysService {
     final Logger log = LoggerFactory.getLogger(this.getClass());
     MposService mposService = new MposServiceImpl(this);
     MerchantService merchantService = new MerchantServiceImpl(this);
+    PaymentService paymentService = new PaymentServiceImpl(this);
+    CardbindingService cardbindingService = new CardbindingServiceImpl(this);
+
+
     MypaysConfigStorage mypaysConfigStorage;
 
     @Override
@@ -72,13 +74,5 @@ public abstract class BaseMypaysServiceImpl implements MypaysService {
         return accessToken;
     }
 
-    /**
-     * 聚合支付
-     *
-     * @return
-     */
-    @Override
-    public MposService getMposService() {
-        return mposService;
-    }
+
 }

@@ -1,8 +1,10 @@
 package com.zoeyun.mypays.sdk.service.impl;
 
 import com.zoeyun.mypays.sdk.exception.MypaysException;
+import com.zoeyun.mypays.sdk.service.CardbindingService;
 import com.zoeyun.mypays.sdk.service.MerchantService;
 import com.zoeyun.mypays.sdk.service.MposService;
+import com.zoeyun.mypays.sdk.service.PaymentService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -256,4 +258,15 @@ public class MypaysServiceApacheHttpImpl extends BaseMypaysServiceImpl {
     public MerchantService getMerchantService() {
         return merchantService;
     }
+
+    @Override
+    public CardbindingService getCardbindingService() {
+        return cardbindingService;
+    }
+
+    @Override
+    public PaymentService getPaymentService() {
+        return paymentService;
+    }
+
 }

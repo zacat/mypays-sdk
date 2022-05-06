@@ -42,7 +42,7 @@ public class MerchantServiceImpl implements MerchantService {
 
     @Override
     public MerchantLedgerRelationsQueryResult ledgerRelationsQuery(MerchantLedgerRelationsQueryRequest request) throws MypaysException {
-        String url = this.payService.getPayBaseUrl() + "/api/merchant/ledger-relations/get";
+        String url = this.payService.getPayBaseUrl() + "/api/merchant/ledger-relations/query";
         request.checkAndSign(payService.getConfigStorage());
         String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
         MerchantLedgerRelationsQueryResult result = BaseMypaysResult.fromJSON(responseContent, MerchantLedgerRelationsQueryResult.class);

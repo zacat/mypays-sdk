@@ -93,4 +93,14 @@ public interface MypaysService {
      * @return
      */
     MerchantService getMerchantService();
+
+    /**
+     * 绑定服务
+     */
+    CardbindingService getCardbindingService();
+
+    /**
+     * 代付服务
+     */
+    PaymentService getPaymentService();
 }

@@ -22,7 +22,7 @@ public interface MposService {
      * @return
      * @throws MypaysException
      */
-    MposGetResult get(MposGetRequest request) throws MypaysException;
+    MposGetResult query(MposGetRequest request) throws MypaysException;
 
     /**
      * 交易订单关闭

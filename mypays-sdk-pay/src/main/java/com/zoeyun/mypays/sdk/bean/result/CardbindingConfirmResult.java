@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class CardBindingCreateResult extends BaseMypaysResult {
+public class CardbindingConfirmResult extends BaseMypaysResult {
 
     /**
      * 交易状态
