@@ -10,7 +10,7 @@ import java.util.concurrent.locks.ReentrantLock;
 @Data
 public class MypaysDefaultConfigImpl implements MypaysConfigStorage, Serializable {
 
-    private static final String DEFAULT_PAY_BASE_URL = "http://test.mypays.cn";
+    private static final String DEFAULT_PAY_BASE_URL = "https://faas.mypays.cn";
     private static final String DEFAULT_SANDBOX_PAY_BASE_URL = "http://test.mypays.cn";
 
     protected volatile String clientId;
