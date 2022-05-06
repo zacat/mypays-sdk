@@ -5,10 +5,10 @@
     <parent>
         <artifactId>mypays-sdk</artifactId>
         <groupId>com.zoeyun</groupId>
-        <version>1.0.1</version>
+        <version>1.0.2</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.0.1</version>
+    <version>1.0.2</version>
     <packaging>jar</packaging>
     <artifactId>mypays-sdk-common</artifactId>
     <name>汇享天成聚合支付 - Common Java SDK</name>
