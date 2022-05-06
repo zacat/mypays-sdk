@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.zoeyun.mypays.sdk.config.MypaysConfigStorage;
 import com.zoeyun.mypays.sdk.exception.MypaysException;
+import com.zoeyun.mypays.sdk.service.MerchantService;
 import com.zoeyun.mypays.sdk.service.MposService;
 import com.zoeyun.mypays.sdk.service.MypaysService;
 import lombok.SneakyThrows;
@@ -15,6 +16,7 @@ public abstract class BaseMypaysServiceImpl implements MypaysService {
 
     final Logger log = LoggerFactory.getLogger(this.getClass());
     MposService mposService = new MposServiceImpl(this);
+    MerchantService merchantService = new MerchantServiceImpl(this);
     MypaysConfigStorage mypaysConfigStorage;
 
     @Override

@@ -6,9 +6,10 @@ import com.zoeyun.mypays.sdk.exception.MypaysException;
 public interface MypaysService {
 
     String getPayBaseUrl();
- 
+
 
     void setConfigStorage(MypaysConfigStorage mypaysConfigStorage);
+
     MypaysConfigStorage getConfigStorage();
 
     String getAccessToken();
@@ -78,10 +79,18 @@ public interface MypaysService {
      * @throws MypaysException the wx pay exception
      */
     String postJSON(String authorization, String sign, String url, String requestStr) throws MypaysException;
+
     /**
      * 聚合支付
      *
      * @return
      */
     MposService getMposService();
+
+    /**
+     * 商户服务
+     *
+     * @return
+     */
+    MerchantService getMerchantService();
 }

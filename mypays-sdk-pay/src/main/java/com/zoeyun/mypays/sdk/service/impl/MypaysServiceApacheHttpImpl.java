@@ -1,6 +1,7 @@
 package com.zoeyun.mypays.sdk.service.impl;
 
 import com.zoeyun.mypays.sdk.exception.MypaysException;
+import com.zoeyun.mypays.sdk.service.MerchantService;
 import com.zoeyun.mypays.sdk.service.MposService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.config.RequestConfig;
@@ -249,5 +250,10 @@ public class MypaysServiceApacheHttpImpl extends BaseMypaysServiceImpl {
     @Override
     public MposService getMposService() {
         return mposService;
+    }
+
+    @Override
+    public MerchantService getMerchantService() {
+        return merchantService;
     }
 }
