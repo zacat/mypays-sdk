@@ -49,7 +49,7 @@ public class MposServiceImpl implements MposService {
 
     @Override
     public MposGetResult query(MposGetRequest request) throws MypaysException {
-        String url = this.payService.getPayBaseUrl() + "/api/txn/mpos/query";
+        String url = this.payService.getPayBaseUrl() + "/api/txn/mpos/get";
         request.checkAndSign(payService.getConfigStorage());
         String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
         MposGetResult result = BaseMypaysResult.fromJSON(responseContent, MposGetResult.class);
