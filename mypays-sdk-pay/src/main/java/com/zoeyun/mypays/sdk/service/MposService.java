@@ -31,7 +31,7 @@ public interface MposService {
      * @return
      * @throws MypaysException
      */
-    MposGetResult query(MposGetRequest request) throws MypaysException;
+    MposQueryResult query(MposQueryRequest request) throws MypaysException;
 
     /**
      * 交易订单关闭

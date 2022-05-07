@@ -6,7 +6,6 @@ import com.zoeyun.mypays.sdk.bean.BaseMypaysResult;
 import com.zoeyun.mypays.sdk.bean.notify.MposOrderNotifyResult;
 import com.zoeyun.mypays.sdk.bean.request.*;
 import com.zoeyun.mypays.sdk.bean.result.*;
-import com.zoeyun.mypays.sdk.common.exception.MypaysRuntimeException;
 import com.zoeyun.mypays.sdk.common.utils.RsaUtils;
 import com.zoeyun.mypays.sdk.exception.MypaysException;
 import com.zoeyun.mypays.sdk.service.MposService;
@@ -48,11 +47,11 @@ public class MposServiceImpl implements MposService {
     }
 
     @Override
-    public MposGetResult query(MposGetRequest request) throws MypaysException {
+    public MposQueryResult query(MposQueryRequest request) throws MypaysException {
         String url = this.payService.getPayBaseUrl() + "/api/txn/mpos/get";
         request.checkAndSign(payService.getConfigStorage());
         String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
-        MposGetResult result = BaseMypaysResult.fromJSON(responseContent, MposGetResult.class);
+        MposQueryResult result = BaseMypaysResult.fromJSON(responseContent, MposQueryResult.class);
         return result;
     }
 

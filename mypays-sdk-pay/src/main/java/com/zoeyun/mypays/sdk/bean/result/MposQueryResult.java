@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class MposGetResult extends BaseMypaysResult {
+public class MposQueryResult extends BaseMypaysResult {
 
 
     /**

@@ -22,7 +22,7 @@ import java.util.Map;
 @Builder(builderMethodName = "newBuilder")
 @NoArgsConstructor
 @AllArgsConstructor
-public class MposGetRequest extends BaseMypaysRequest {
+public class MposQueryRequest extends BaseMypaysRequest {
 
     /**
      * 商户订单号
