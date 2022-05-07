@@ -8,7 +8,7 @@
         <version>1.0.3</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <version>1.0.3</version>
+    <version>1.0.5</version>
     <packaging>jar</packaging>
     <artifactId>mypays-sdk-pay</artifactId>
     <name>汇享天成聚合支付 - Pay Java SDK</name>

@@ -14,6 +14,6 @@
 <dependency>
   <groupId>com.zoeyun</groupId>
   <artifactId>mypays-sdk-pay</artifactId>
-  <version>1.0.3</version>
+  <version>1.0.5</version>
 </dependency>
 ```
