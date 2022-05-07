@@ -1,13 +1,21 @@
 package com.zoeyun.mypays.sdk.service.impl;
 
+
 import com.zoeyun.mypays.sdk.bean.BaseMypaysListResult;
 import com.zoeyun.mypays.sdk.bean.BaseMypaysResult;
+import com.zoeyun.mypays.sdk.bean.notify.MposOrderNotifyResult;
 import com.zoeyun.mypays.sdk.bean.request.*;
 import com.zoeyun.mypays.sdk.bean.result.*;
+import com.zoeyun.mypays.sdk.common.exception.MypaysRuntimeException;
+import com.zoeyun.mypays.sdk.common.utils.RsaUtils;
 import com.zoeyun.mypays.sdk.exception.MypaysException;
 import com.zoeyun.mypays.sdk.service.MposService;
 import com.zoeyun.mypays.sdk.service.MypaysService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
+
+import javax.servlet.http.HttpServletRequest;
+import java.security.PrivateKey;
 
 @RequiredArgsConstructor
 public class MposServiceImpl implements MposService {
@@ -21,6 +29,21 @@ public class MposServiceImpl implements MposService {
         request.checkAndSign(payService.getConfigStorage());
         String responseContent = this.payService.post(payService.getAccessToken(), request.getSign(), url, request.toJSONString());
         MposCreateResult result = BaseMypaysResult.fromJSON(responseContent, MposCreateResult.class);
+        return result;
+    }
+
+    @Override
+    public MposOrderNotifyResult parseOrderNotifyResult(HttpServletRequest request, String responseContent) throws MypaysException {
+        String sign = request.getHeader("x-token-sign");
+        if (StringUtils.isEmpty(sign)) {
+            throw new MypaysException("sign签名为空");
+        }
+        PrivateKey privateKey = RsaUtils.getPrivateKeyFromPKCS8(RsaUtils.SIGN_TYPE_RSA2, payService.getConfigStorage().getRsaPriKey().getBytes());
+        String checkSign = RsaUtils.rsa256Sign(responseContent.getBytes(), privateKey);
+        if (!sign.equals(checkSign)) {
+            throw new MypaysException("sign签名无效");
+        }
+        MposOrderNotifyResult result = BaseMypaysResult.fromJSON(responseContent, MposOrderNotifyResult.class);
         return result;
     }
 

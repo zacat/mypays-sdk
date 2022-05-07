@@ -1,8 +1,11 @@
 package com.zoeyun.mypays.sdk.service;
 
+import com.zoeyun.mypays.sdk.bean.notify.MposOrderNotifyResult;
 import com.zoeyun.mypays.sdk.bean.request.*;
 import com.zoeyun.mypays.sdk.bean.result.*;
 import com.zoeyun.mypays.sdk.exception.MypaysException;
+
+import javax.servlet.http.HttpServletRequest;
 
 public interface MposService {
 
@@ -14,6 +17,12 @@ public interface MposService {
      * @throws MypaysException
      */
     MposCreateResult create(MposCreateRequest request) throws MypaysException;
+
+    /**
+     * 解析聚合支付订单回调
+     */
+    MposOrderNotifyResult parseOrderNotifyResult(HttpServletRequest request, String responseContent) throws MypaysException;
+
 
     /**
      * 交易订单查询
@@ -89,6 +98,7 @@ public interface MposService {
 
     /**
      * 账单查询
+     *
      * @param request
      * @return
      * @throws MypaysException
