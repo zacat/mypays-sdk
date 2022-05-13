@@ -3,6 +3,7 @@ package com.zoeyun.mypays.sdk.bean;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import com.zoeyun.mypays.sdk.common.bean.MypaysResult;
 import com.zoeyun.mypays.sdk.common.exception.MypaysRuntimeException;
 import lombok.Data;
@@ -13,6 +14,8 @@ import java.util.List;
 public abstract class BaseMypaysResult extends MypaysResult {
     int status;
     String message;
+
+    @JSONField(serialize = false, deserialize = false)
     String responseContent;
 
 
